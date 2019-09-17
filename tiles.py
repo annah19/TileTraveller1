@@ -1,4 +1,7 @@
+# Playing the Tile game
+n = str("(N)orth")
+e = str("(E)ast")
+s = str("(S)outh")
+w = str("(W)est")
 
-print('test')
-print("test2")
-#Hæ hæ hæhæhæ
+print("You can travel: " +n)
