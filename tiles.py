@@ -4,4 +4,6 @@ e = str("(E)ast")
 s = str("(S)outh")
 w = str("(W)est")
 
+
 print("You can travel: " +n)
+user_input = input("Direction: ")
