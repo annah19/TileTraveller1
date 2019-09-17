@@ -7,3 +7,7 @@ w = str("(W)est")
 
 print("You can travel: " +n)
 user_input = input("Direction: ")
+
+HORIZONTAL = 1
+VERTICAL = 1
+
