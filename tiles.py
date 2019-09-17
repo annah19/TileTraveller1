@@ -9,6 +9,7 @@ s = str("(S)outh")
 w = str("(W)est")
 
 
+<<<<<<< HEAD
 
 
 while True:
@@ -22,3 +23,11 @@ while True:
 
     else:
         print('Not a valid direction')
+=======
+print("You can travel: " +n)
+user_input = input("Direction: ")
+
+HORIZONTAL = 1
+VERTICAL = 1
+
+>>>>>>> e9a5317707c2996446dd0b8545de08b5321bb748
