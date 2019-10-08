@@ -71,6 +71,21 @@ def play_one_move(col, row, valid_directions):
         victory = is_victory(col, row)
     return victory, col, row
 
+def Lever():
+    ''' Give the user an opportunity to collect coins.'''
+
+    lever = input("Pull a lever (y/n): ")
+    lever = lever.lower()
+
+    conter = 0
+    if lever == "y":
+        count += 1
+    elif lever == "n": 
+        continue
+    else:
+        print("invalid input")
+    return 
+
 # The main program starts here
 victory = False
 row = 1
