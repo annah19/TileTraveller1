@@ -1,12 +1,9 @@
 import string
-import random
 #  Constants
 NORTH = 'n'
 EAST = 'e'
 SOUTH = 's'
 WEST = 'w'
-random_list_direct = ["n","e","s","w"]
-random_list_lever = ["y","n"]
 
 def move(direction, col, row):
     ''' Returns updated col, row given the direction '''
@@ -65,8 +62,7 @@ def play_one_move(col, row, valid_directions):
     ''' Plays one move of the game
         Return if victory has been obtained and updated col,row '''
     victory = False
-    print("Direction: ")
-    direction = random.choice(random_list_direct)
+    direction = input("Direction: ")
     direction = direction.lower()
     
     if not direction in valid_directions:
@@ -80,8 +76,7 @@ def count_coins(col,row,count):
     ''' on specific rows the user collects coins, return a count of the coins'''
    
     if (col,row) == (1,2) or (col,row) == (2,2) or (col,row) == (2,3) or (col,row) == (3,2):
-        print("Pull a lever (y/n): ")
-        lever = random.choice(random_list_lever)
+        lever = input("Pull a lever (y/n): ")
         lever = lever.lower()
 
         if lever == 'y':
@@ -94,11 +89,10 @@ def play():
     victory = False
     row = 1
     col = 1
-    random_number = int(input("Input seed: "))
+
     valid_directions = NORTH
     print_directions(valid_directions)
     count = 0
-    random.seed(random_number)
 
     while not victory:
         victory, col, row = play_one_move(col, row, valid_directions)
@@ -116,4 +110,4 @@ while True:
         play()
     else:
         break
-
+    
