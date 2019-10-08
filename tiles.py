@@ -81,7 +81,7 @@ def count_coins(col,row,count):
 
         if lever == 'y':
             count += 1
-            print("You received 1 coin, your total is now", count,".")
+            print("You received 1 coin, your total is now {}.".format(count))
         
     return count
  
@@ -98,8 +98,9 @@ count = 0
 while not victory:
     victory, col, row = play_one_move(col, row, valid_directions)
     if victory:
-        print("Victory! You got",count,"coins!")
+        print("Victory! Total coins {}.".format(count))
     else:
         valid_directions = find_directions(col, row)
+        count = count_coins(col,row,count)
         print_directions(valid_directions)
-        count_coins(col,row,count)
+        
