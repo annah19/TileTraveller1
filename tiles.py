@@ -73,38 +73,18 @@ def play_one_move(col, row, valid_directions):
     return victory, col, row
 
 def count_coins(col,row,count):
-    ''' Give the user an opportunity to collect coins.'''
+    ''' on specific rows the user collects coins, return a count of the coins'''
+   
+    if (col,row) == (1,2) or (col,row) == (2,2) or (col,row) == (2,3) or (col,row) == (3,2):
+        lever = input("Pull a lever (y/n): ")
+        lever = lever.lower()
 
-    if col == 1 and row == 2:
-        lever = input("Pull a lever (y/n): ")
-        lever = lever.lower()
-        if lever == "y":
+        if lever == 'y':
             count += 1
-        elif lever == "n": 
-            
-    elif col == 2 and row == 2:
-        lever = input("Pull a lever (y/n): ")
-        lever = lever.lower()
-        if lever == "y":
-            count += 1
-        elif lever == "n": 
-            break
-    elif col == 2 and row == 3:
-        lever = input("Pull a lever (y/n): ")
-        lever = lever.lower()
-        if lever == "y":
-            count += 1
-        elif lever == "n": 
-            continue
-    elif col == 3 and row == 2:
-        lever = input("Pull a lever (y/n): ")
-        lever = lever.lower()
-        if lever == "y":
-            count += 1
-        elif lever == "n": 
-            continue
-    # print("You received 1 coin, your total is now",  )
+            print("You received 1 coin, your total is now", count,".")
+        
     return count
+ 
 
 # The main program starts here
 victory = False
@@ -118,9 +98,8 @@ count = 0
 while not victory:
     victory, col, row = play_one_move(col, row, valid_directions)
     if victory:
-        print("Victory!")
+        print("Victory! You got",count,"coins!")
     else:
         valid_directions = find_directions(col, row)
         print_directions(valid_directions)
-        counter = count_coins(col,row,count)
-        print(counter)
+        count_coins(col,row,count)
