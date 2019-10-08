@@ -1,47 +1,88 @@
-def findOutWhereHeIsGoing(x, y, letter):
-    if (checkIfValidDirection(x, y, letter) == True):
-        if (letter == 'n'):
-            y += 1
-        elif (letter == 's'):
-            y -= 1
-        elif (letter == 'w'):
-            x -= 1
-        elif (letter == 'e'):
-            x += 1
-    return x,y
+# Constants
+NORTH = 'n'
+EAST = 'e'
+SOUTH = 's'
+WEST = 'w'
 
-def checkIfValidDirection(x, y, letter):
-    printString = 'Direction: '
-    if (x == 1 and y == 1):
-        # do stuff, f.x. call tile function for 1 and 1
-    elif (x == 1 and y == 2):
+def move(direction, col, row):
+    ''' Returns updated col, row given the direction '''
+    if direction == NORTH:
+        row += 1
+    elif direction == SOUTH:
+        row -= 1
+    elif direction == EAST:
+        col += 1
+    elif direction == WEST:
+        col -= 1
+    return(col, row)    
 
+def is_victory(col, row):
+    ''' Return true is player is in the victory cell '''
+    return col == 3 and row == 1 # (3,1)
 
-    return True
+def print_directions(directions_str):
+    print("You can travel: ", end='')
+    first = True
+    for ch in directions_str:
+        if not first:
+            print(" or ", end='')
+        if ch == NORTH:
+            print("(N)orth", end='')
+        elif ch == EAST:
+            print("(E)ast", end='')
+        elif ch == SOUTH:
+            print("(S)outh", end='')
+        elif ch == WEST:
+            print("(W)est", end='')
+        first = False
+    print(".")
+        
+def find_directions(col, row):
+    ''' Returns valid directions as a string given the supplied location '''
+    if col == 1 and row == 1:   # (1,1)
+        valid_directions = NORTH
+    elif col == 1 and row == 2: # (1,2)
+        valid_directions = NORTH+EAST+SOUTH
+    elif col == 1 and row == 3: # (1,3)
+        valid_directions = EAST+SOUTH
+    elif col == 2 and row == 1: # (2,1)
+        valid_directions = NORTH
+    elif col == 2 and row == 2: # (2,2)
+        valid_directions = SOUTH+WEST
+    elif col == 2 and row == 3: # (2,3)
+        valid_directions = EAST+WEST
+    elif col == 3 and row == 2: # (3,2)
+        valid_directions = NORTH+SOUTH
+    elif col == 3 and row == 3: # (3,3)
+        valid_directions = SOUTH+WEST
+    return valid_directions
 
-def checkIfValidInput(letter):
-    letter = letter.toLower()
-    if (letter == "n" or ...):
-        return True
+def play_one_move(col, row, valid_directions):
+    ''' Plays one move of the game
+        Return if victory has been obtained and updated col,row '''
+    victory = False
+    direction = input("Direction: ")
+    direction = direction.lower()
+    
+    if not direction in valid_directions:
+        print("Not a valid direction!")
     else:
-        return False
+        col, row = move(direction, col, row)
+        victory = is_victory(col, row)
+    return victory, col, row
 
-# Playing the Tile game
-n = "(N)orth"
-e = "(E)ast"
-s = "(S)outh"
-w = "(W)est"
+# The main program starts here
+victory = False
+row = 1
+col = 1
 
-x = 1
-y = 1
-while True:
-    if (x == 3 and y == 3):
-        print('Victory')
-        break  
+valid_directions = NORTH
+print_directions(valid_directions)
 
-    user_input = input("Direction: ")
-    user_input = user_input.toLower()
-    if (checkIfValidInput(user_input) == True):
-        x, y = findOutWhereHeIsGoing(x, y, user_input)
+while not victory:
+    victory, col, row = play_one_move(col, row, valid_directions)
+    if victory:
+        print("Victory!")
     else:
-        print('Not a valid direction')
+        valid_directions = find_directions(col, row)
+        print_directions(valid_directions)
