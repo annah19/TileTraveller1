@@ -84,23 +84,30 @@ def count_coins(col,row,count):
             print("You received 1 coin, your total is now {}.".format(count))
         
     return count
- 
 
-# The main program starts here
-victory = False
-row = 1
-col = 1
+def play():
+    victory = False
+    row = 1
+    col = 1
 
-valid_directions = NORTH
-print_directions(valid_directions)
-count = 0
+    valid_directions = NORTH
+    print_directions(valid_directions)
+    count = 0
 
-while not victory:
-    victory, col, row = play_one_move(col, row, valid_directions)
-    if victory:
-        print("Victory! Total coins {}.".format(count))
+    while not victory:
+        victory, col, row = play_one_move(col, row, valid_directions)
+        if victory:
+            print("Victory! Total coins {}.".format(count))
+        else:
+            valid_directions = find_directions(col, row)
+            count = count_coins(col,row,count)
+            print_directions(valid_directions)
+
+play()
+while True:
+    play_again = input("Play again (y/n): ")
+    if play_again == "y":
+        play()
     else:
-        valid_directions = find_directions(col, row)
-        count = count_coins(col,row,count)
-        print_directions(valid_directions)
-        
+        break
+    
